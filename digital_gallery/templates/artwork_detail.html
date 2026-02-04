@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}{{ artwork.title }} - ArtSphere{% endblock %}
+
+{% block content %}
+<div class="container" style="background-color: white; padding: 20px; border-radius: 10px;">
+    <br><br><br><br><br><br>
+    <div class="artwork-detail" style="color: black;">
+        <h2>{{ artwork.title }}</h2>
+        <br><br><br>
+        {% if artwork.image_url.endswith('.mp4') %}
+            <video class="artwork-vedio-large" autoplay loop muted>
+                <source src="{{ artwork.image_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        {% else %}
+            <img src="{{ artwork.image_url }}" alt="{{ artwork.title }}" class="artwork-image-large">
+        {% endif %}
+        <p><strong>Description:</strong> {{ artwork.description }}</p>
+        <p><strong>Artist:</strong> {{ artwork.artist_name }}</p>
+        <p><strong>Biography:</strong> {{ artwork.artist_bio }}</p>
+        <p><strong>Creation Date:</strong> {{ artwork.creation_date }}</p>
+        <p><strong>Price:</strong> ${{ artwork.price }}</p>
+
+        {% if artwork.auction_status == 'active' %}
+            <p><strong>Currently in Auction:</strong> Yes</p>
+            <p><strong>Auction Start Date:</strong> {{ artwork.start_date }}</p>
+            <p><strong>Auction End Date:</strong> {{ artwork.end_date }}</p>
+            <p><strong>Current Highest Bid:</strong> ${{ artwork.current_highest_bid }}</p>
+            <p class="text-warning">This artwork is currently in auction and cannot be purchased.</p>
+        {% else %}
+            <p><strong>Currently in Auction:</strong> No</p>
+            {% if user_logged_in %}
+                <div style="text-align: center; margin-top: 20px;">
+                    <form method="POST" action="{{ url_for('purchase_artwork', artwork_id=artwork.artwork_id) }}">
+                        <button type="submit" class="btn btn-primary" style="padding: 15px 30px; font-size: 18px;">Purchase</button>
+                    </form>
+                </div>
+            {% else %}
+                <p>Please <a href="{{ url_for('login') }}">log in</a> to purchase this artwork.</p>
+            {% endif %}
+        {% endif %}
+        <br><br><br><br><br><br>
+    </div>
+</div>
+{% endblock %}

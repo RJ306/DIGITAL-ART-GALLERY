@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Dashboard</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css"> <!-- Link to your CSS -->
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/home">ArtSphere</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/my-artworks">My Artworks</a></li>
+                <li><a href="/artworks-auctions">Artwork in Auctions</a></li>
+                <li><a href="/notifications">Notifications</a></li>
+                <li><a href="/update-profile">Update Profile</a></li>
+            </ul>
+            <a href="/logout" class="logout-button">Logout</a>
+        </nav>
+    </header>
+
+    <!-- Main Section (Black Rectangle with Artist Name) -->
+    <main>
+        <div class="fullscreen-background"></div>
+        <div class="content">
+            <h1>Welcome, Artist {{ artist_name }} </h1>
+        </div>
+        
+
+        <!-- Featured Artworks Section -->
+        <section class="featured-artworks">
+            <h2>My Featured Artworks</h2>
+
+            <div class="art-container">
+                {% for art in featured_artworks %}
+                <div class="art-card">
+                    <a href="{{ url_for('artwork_detail', artwork_id=art.artwork_id) }}">
+                        {% if art.image_url.endswith('.mp4') %}
+                        <video class="art-video" autoplay loop muted>
+                            <source src="{{ art.image_url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        {% else %}
+                        <img src="{{ art.image_url }}" alt="{{ art.title }}" class="art-image">
+                        {% endif %}
+                        <h3>{{ art.title }}</h3>
+                    </a>
+                    <p>{{ art.description }}</p>
+                    <p class="art-price">Price: {{ art.price }}$</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Artist Performance & Insights -->
+        <section class="performance-insights">
+            <h2>Artist Insights</h2>
+            <p>Total Earnings: ${{ total_earnings }}</p>
+            <p>Popular Artwork: "{{ popular_artwork_title }}"</p>
+            <a href="/performance-reports">View Detailed Reports</a>
+        </section>
+    </main>
+    
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 ArtSphere. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

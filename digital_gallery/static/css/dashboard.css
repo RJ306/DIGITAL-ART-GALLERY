@@ -1,0 +1,224 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    padding-top: 80px; 
+}
+
+/* Header Styling */
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Keeps the header fixed at the top */
+    top: 0;          /* Aligns the header to the top */
+    left: 0;         /* Aligns the header to the left */
+    width: 100%;     /* Ensures the header spans the full width of the page */
+    z-index: 1000;   /* Ensures the header stays on top of other content */
+}
+  /* Video Section Styling (Updated) */
+  
+    .fullscreen-background {
+        position: fixed; /* Covers the entire viewport */
+        top: 0;
+        left: 0;
+        width: 100vw; /* Full viewport width */
+        height: 100vh; /* Full viewport height */
+        background-image: url("{{ url_for('static', filename='images/bg_artist.avif') }}");
+        background-size: cover; /* Ensures the image covers the area without distortion */
+        background-position: center; /* Centers the image */
+        background-repeat: no-repeat; /* Prevents the image from repeating */
+        z-index: -1; /* Sends the background behind other elements */
+    }
+     /* Fallback background color */
+ 
+  
+     .content {
+        position: relative; /* To stack above the background */
+        z-index: 1; /* Brings content above the background */
+        color: rgb(255, 72, 0); /* To match your text color */
+        font-size: 2rem;
+        text-align: center;
+        margin-top: 20%;
+    }
+    
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar .logo a {
+    color: #FF6600;
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.nav-links li a:hover {
+    background-color: #FF6600;
+    border-radius: 5px;
+}
+
+.logout-button {
+    background-color: #FF6600;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.logout-button:hover {
+    background-color: #cc5200;
+}
+
+/* Main Section (Welcome Box) */
+.welcome-box {
+    background-color: #000;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+    margin: 20px auto;
+    max-width: 1000px;
+    border-radius: 10px;
+}
+
+.welcome-box h1 {
+    font-size: 32px;
+}
+
+/* Footer Section */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+}
+/* Dashboard Overview */
+.dashboard-overview {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard-overview .stat {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 30%;
+}
+
+.dashboard-overview .stat h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Featured Artworks */
+.featured-artworks {
+    padding: 20px;
+}
+
+.featured-artworks h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.artwork-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+/* Performance Insights */
+.performance-insights h1 {
+text-align: center;
+}
+/* Performance Insights */
+.performance-insights {
+     
+    padding: 20px;
+    background-color: #fff;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+.performance-insights a {
+    color: #FF6600;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.art-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* Space between the images */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    max-width: 1200px; /* Optional: restrict the container width */
+}
+
+.art-card {
+    text-align: center;
+    border: 1px solid #ddd; /* Optional: border around each card */
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fff; /* Optional: card background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: shadow */
+}
+
+.art-image {
+    width: 100%; /* Ensure images are responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px;
+}
+
+.art-video {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .art-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .art-container {
+        grid-template-columns: 1fr; /* 1 column for small screens */
+    }
+}

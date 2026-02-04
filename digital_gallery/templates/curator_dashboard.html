@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtSphere - Curator Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/curator.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>ArtSphere</h1>
+            <nav>
+                <button><i class="fas fa-cog"></i></button>
+                <a href="/logout" class="logout-button">
+                    <button><i class="fas fa-sign-out-alt"></i></button>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="curator-card">
+            <div class="curator-info">
+                <h2>Curator Profile</h2>
+                <div class="info-details">
+                    <p>Name: {{ current_user.name }}</p>
+                    <p>Email: {{ current_user.email }}</p>
+                    <p>Specialization: Modern Art</p>
+                </div>
+            </div>
+            <div class="auction-counter">
+                <p>Active Auctions</p>
+                <p class="count">12</p>
+            </div>
+        </div>
+
+        <div class="action-boxes">
+            <div class="action-box">
+                <div class="box-header">
+                    <h3>Organize Auction</h3>
+                    <i class="fas fa-calendar"></i>
+                </div>
+                <p>Create and manage new art auctions</p>
+                <a href="{{ url_for('organize_auction') }}">
+                    <button class="action-btn">Create New</button>
+                </a>
+            </div>
+
+            <div class="action-box">
+                <div class="box-header">
+                    <h3>Notify Artists</h3>
+                    <i class="fas fa-bell"></i>
+                </div>
+                <p>Send notifications about upcoming auctions</p>
+                <a href="{{ url_for('notify_artist') }}">
+                <button class="action-btn">Send Notifications</button>
+            </a>
+            </div>
+
+            <div class="action-box">
+                <div class="box-header">
+                    <h3>Approve Artwork</h3>
+                    <i class="fas fa-check-square"></i>
+                </div>
+                <p>Review and approve submitted artworks</p>
+                <a href="{{ url_for('approve_artwork') }}">
+                <button class="action-btn">Review Submissions</button>
+            </a>
+            </div>
+            <div class="action-box">
+                <div class="box-header">
+                    <h3>View Auctions</h3>
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <p>Explore ongoing auctions and their details</p>
+                <a href="{{ url_for('auction_page') }}">
+                    <button class="action-btn">View Auctions</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

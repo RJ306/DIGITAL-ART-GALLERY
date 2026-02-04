@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Your Bid</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='auction.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="header">
+            <h1>Place Your Bid</h1>
+        </div>
+    </header>
+
+    <div class="auction-details">
+        <h2>{{ auction.auction_name }}</h2>
+        <p><strong>Start Date:</strong> {{ auction.start_date }}</p>
+        <p><strong>End Date:</strong> {{ auction.end_date }}</p>
+        <h3>Current Highest Bid: ${{ current_highest_bid }}</h3>
+    </div>
+
+    <div class="bids-list">
+        <h3>All Bids</h3>
+        <ul>
+            {% for bid in bids %}
+            <li>
+                <p>User: {{ bid.user_id }} | Amount: ${{ bid.bid_amount }} | Time: {{ bid.bid_time }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    
+
+    {% if error_message %}
+    <div class="error-message">
+        <p>{{ error_message }}</p>
+    </div>
+    {% endif %}
+
+    <footer>
+        <p>&copy; 2024 Auction House. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

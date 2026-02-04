@@ -1,0 +1,301 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a; /* Dark background */
+    color: #ffffff; /* White text */
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(to right, #ff6b35, #ffa600); /* Orange gradient */
+    color: #1a1a1a; /* Black text */
+    padding: 1.5rem 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header nav button {
+    background: none;
+    border: none;
+    color: #1a1a1a; /* Black text */
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.header nav button:hover {
+    color: #ffffff; /* White text on hover */
+}
+
+/* Main container */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Curator card */
+.curator-card {
+    background: #2a2a2a; /* Dark gray background */
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.curator-info h2 {
+    font-size: 1.75rem;
+    color: #ff6b35; /* Orange accent */
+    margin-bottom: 1rem;
+}
+
+.info-details p {
+    color: #cccccc; /* Light gray text */
+    margin: 0.5rem 0;
+}
+
+.auction-counter {
+    background: #333333; /* Slightly lighter gray */
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.auction-counter p {
+    color: #cccccc; /* Light gray text */
+    margin-bottom: 0.5rem;
+}
+
+.auction-counter .count {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6b35; /* Orange accent */
+}
+
+/* Action boxes */
+.action-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.action-box {
+    background: #2a2a2a; /* Dark gray background */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+}
+
+.box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.box-header h3 {
+    font-size: 1.25rem;
+    color: #ff6b35; /* Orange accent */
+}
+
+.box-header i {
+    font-size: 1.5rem;
+    color: #ff6b35; /* Orange accent */
+}
+
+.action-box p {
+    color: #cccccc; /* Light gray text */
+    margin-bottom: 1.5rem;
+}
+
+.action-btn {
+    background: #ff6b35; /* Orange button */
+    color: #1a1a1a; /* Black text */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+    background: #ffa600; /* Yellow-orange hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .curator-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .auction-counter {
+        margin-top: 1.5rem;
+    }
+
+    .action-boxes {
+        grid-template-columns: 1fr;
+    }
+}
+/* View Auctions Page */
+.auctions-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.auctions {
+    background: #2a2a2a; /* Dark gray background */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.auctions h2 {
+    font-size: 2rem;
+    color: #ff6b35; /* Orange accent */
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #ff6b35;
+    padding-bottom: 0.5rem;
+}
+
+.auction-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.auction-item {
+    background: #333333; /* Slightly lighter gray */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auction-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.auction-item h3 {
+    font-size: 1.5rem;
+    color: #ffa600; /* Yellow-orange accent */
+    margin-bottom: 1rem;
+}
+
+.auction-item p {
+    color: #cccccc; /* Light gray text */
+    margin: 0.5rem 0;
+}
+
+.artworks {
+    margin-top: 1rem;
+}
+
+.artworks h4 {
+    font-size: 1.2rem;
+    color: #ff6b35; /* Orange accent */
+    margin-bottom: 0.5rem;
+}
+
+.artwork {
+    background: #2a2a2a; /* Dark gray background */
+    border-radius: 0.25rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.artwork p {
+    margin: 0.25rem 0;
+    color: #cccccc; /* Light gray text */
+}
+
+/* Bid form */
+form {
+    margin-top: 1rem;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #ffa600; /* Yellow-orange accent */
+}
+
+form input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ff6b35; /* Orange border */
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    background: #2a2a2a; /* Dark gray background */
+    color: #ffffff; /* White text */
+}
+
+form input[type="number"]:focus {
+    border-color: #ffa600; /* Yellow-orange focus */
+    outline: none;
+}
+
+form button {
+    background: #ff6b35; /* Orange button */
+    color: #1a1a1a; /* Black text */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background: #ffa600; /* Yellow-orange hover */
+}
+
+/* Footer */
+footer {
+    background: #1a1a1a; /* Dark background */
+    color: #ffffff; /* White text */
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    border-top: 2px solid #ff6b35; /* Orange accent */
+}
+
+footer p {
+    margin: 0;
+}

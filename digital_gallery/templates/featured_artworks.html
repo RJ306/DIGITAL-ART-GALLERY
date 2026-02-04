@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Artworks</title>
+    <link rel="stylesheet" href="/static/css/featured_Artworks.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/home">ArtSphere</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/my-artworks">My Artworks</a></li>
+                <li><a href="/artworks-auctions">Artwork in Auctions</a></li>
+                <li><a href="/notifications">Notifications</a></li>
+                <li><a href="/update-profile">Update Profile</a></li>
+            </ul>
+            <a href="/logout" class="logout-button">Logout</a>
+        </nav>
+    </header>
+
+    <!-- Featured Artworks Section -->
+    <div class="container">
+        <br><br><br><br><br><br>
+    
+        <!-- Section: Featured Artworks -->
+        <h2 class="section-title">Featured Artworks</h2>
+        <br>
+        <div class="art-container">
+            {% for art in featured_artworks %}
+            <div class="art-card">
+                <!-- Artwork Details Link -->
+                {% if session['user_id'] %}
+                <a href="{{ url_for('artwork_detail', artwork_id=art.artwork_id) }}">
+                {% else %}
+                <a href="{{ url_for('login') }}">
+                {% endif %}
+                    {% if art.image_url.endswith('.mp4') %}
+                    <!-- Video Artworks -->
+                    <video class="art-video" autoplay loop muted>
+                        <source src="{{ art.image_url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    {% else %}
+                    <!-- Image Artworks -->
+                    <img src="{{ art.image_url }}" alt="{{ art.title }}" class="art-image">
+                    {% endif %}
+                    <h3>{{ art.title }}</h3>
+                </a>
+                <p>{{ art.description }}</p>
+    
+                <!-- Price and Additional Info -->
+                <p class="art-price">Price: {{ art.price }}$</p>
+                <p class="art-category">Category: {{ art.category_name }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 ArtSphere. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

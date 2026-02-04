@@ -1,0 +1,8 @@
+<h2>Your Notifications</h2>
+<ul>
+    {% for notification in notifications %}
+        <li>
+            {{ notification[1] }} {% if not notification[2] %}<strong>(New)</strong>{% endif %}
+        </li>
+    {% endfor %}
+</ul>

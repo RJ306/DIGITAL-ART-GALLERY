@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Artwork for Auction</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a1a1a; /* Dark background */
+            font-family: 'Arial', sans-serif;
+            color: #ffffff; /* White text */
+        }
+    
+        .container {
+            margin-top: 30px;
+        }
+    
+        h2, h3 {
+            color: #ff6b35; /* Orange accent */
+        }
+    
+        .alert {
+            margin-top: 20px;
+            background-color: #2a2a2a; /* Dark gray background */
+            border: 1px solid #ff6b35; /* Orange border */
+            color: #ffffff; /* White text */
+        }
+    
+        .list-group-item {
+            background-color: #2a2a2a; /* Dark gray background */
+            border: 1px solid #444; /* Darker gray border */
+            margin-bottom: 10px;
+            color: #ffffff; /* White text */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .list-group-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+    
+        .list-group-item h5 {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffa600; /* Yellow-orange accent */
+        }
+    
+        .list-group-item p {
+            font-size: 1em;
+            color: #cccccc; /* Light gray text */
+        }
+    
+        .btn-success {
+            background-color: #ff6b35; /* Orange button */
+            border-color: #ff6b35;
+            color: #1a1a1a; /* Black text */
+            transition: background-color 0.3s ease;
+        }
+    
+        .btn-success:hover {
+            background-color: #ffa600; /* Yellow-orange hover */
+            border-color: #ffa600;
+        }
+    
+        .btn-primary {
+            background-color: #ff6b35; /* Orange button */
+            border-color: #ff6b35;
+            color: #1a1a1a; /* Black text */
+            transition: background-color 0.3s ease;
+        }
+    
+        .btn-primary:hover {
+            background-color: #ffa600; /* Yellow-orange hover */
+            border-color: #ffa600;
+        }
+    
+        .modal-content {
+            background-color: #2a2a2a; /* Dark gray background */
+            color: #ffffff; /* White text */
+            border: 1px solid #ff6b35; /* Orange border */
+        }
+    
+        .modal-header {
+            background-color: #ff6b35; /* Orange header */
+            color: #1a1a1a; /* Black text */
+            border-bottom: 1px solid #ff6b35;
+        }
+    
+        .modal-footer .btn-secondary {
+            background-color: #6c757d; /* Gray button */
+            border-color: #6c757d;
+            color: #ffffff; /* White text */
+        }
+    
+        .modal-footer .btn-secondary:hover {
+            background-color: #5a6268; /* Darker gray hover */
+            border-color: #545b62;
+        }
+    
+        .modal-footer .btn-success {
+            background-color: #ff6b35; /* Orange button */
+            border-color: #ff6b35;
+            color: #1a1a1a; /* Black text */
+        }
+    
+        .modal-footer .btn-success:hover {
+            background-color: #ffa600; /* Yellow-orange hover */
+            border-color: #ffa600;
+        }
+    
+        .form-control {
+            background-color: #333333; /* Dark gray background */
+            border: 1px solid #444; /* Darker gray border */
+            color: #ffffff; /* White text */
+        }
+    
+        .form-control:focus {
+            background-color: #444; /* Slightly lighter gray */
+            border-color: #ff6b35; /* Orange border */
+            color: #ffffff; /* White text */
+            box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25); /* Orange glow */
+        }
+    
+        .form-group label {
+            color: #ffa600; /* Yellow-orange accent */
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Approve Artwork for Auction</h2>
+
+        <!-- Display flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-{{ messages[0][0] }}">
+                    {{ messages[0][1] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Form to select an auction -->
+        <form action="{{ url_for('approve_artwork') }}" method="POST">
+            <div class="form-group">
+                <label for="auction_id">Select Auction</label>
+                <select class="form-control" id="auction_id" name="auction_id" required>
+                    {% for auction in auctions %}
+                        <option value="{{ auction.auction_id }}">{{ auction.auction_name }} - {{ auction.start_date }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Approve Artwork</button>
+        </form>
+
+        <h3 class="mt-5">Pending Artworks for Approval</h3>
+        {% if pending_artworks %}
+            <ul class="list-group">
+                {% for artwork in pending_artworks %}
+                    <li class="list-group-item">
+                        <h5>{{ artwork.title }}</h5>
+                        <p>Artist: {{ artwork.artist_name }}</p>
+                        <p>Description: {{ artwork.description }}</p>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#approveModal{{ artwork.artwork_id }}">
+                            Approve
+                        </button>
+                    </li>
+
+                    <!-- Modal to approve artwork -->
+                    <div class="modal fade" id="approveModal{{ artwork.artwork_id }}" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="approveModalLabel">Approve Artwork</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to approve this artwork for the auction?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <a href="{{ url_for('approve_artwork') }}?approve={{ artwork.artwork_id }}" class="btn btn-success">Approve</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No pending artworks for approval.</p>
+        {% endif %}
+
+        <h3 class="mt-5">Top 10 Most Wishlisted Artworks</h3>
+        {% if top_wishlisted_artworks %}
+            <ul class="list-group">
+                {% for artwork in top_wishlisted_artworks %}
+                    <li class="list-group-item">
+                        <h5>{{ artwork.title }} - {{ artwork.wishlist_count }} Wishlists</h5>
+                        <form action="{{ url_for('approve_artwork') }}" method="POST">
+                            <input type="hidden" name="artwork_id" value="{{ artwork.artwork_id }}">
+                            <button type="submit" class="btn btn-success">Approve for Auction</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No top wishlisted artworks to approve.</p>
+        {% endif %}
+        
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

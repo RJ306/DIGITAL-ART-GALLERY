@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place a Bid</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bid.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="header">
+            <h1>Place Your Bid</h1>
+        </div>
+    </header>
+
+    <div class="bid-container">
+        <!-- Auction details -->
+        <section class="auction-details">
+            <h2>{{ auction.auction_name }}</h2>
+            <p>Start Date: {{ auction.start_date }}</p>
+            <p>End Date: {{ auction.end_date }}</p>
+            <p><strong>Artwork:</strong> {{ artwork.title }}</p>
+            <p><strong>Description:</strong> {{ artwork.description }}</p>
+            <p><strong>Current Highest Bid:</strong> ${{ auction.current_highest_bid }}</p>
+        </section>
+
+        <!-- Bid form -->
+        <section class="place-bid">
+            <h3>Your Bid</h3>
+            <form action="{{ url_for('submit_bid', auction_id=auction.auction_id) }}" method="POST">
+                <div class="form-group">
+                    <label for="bid_amount">Bid Amount ($):</label>
+                    <input type="number" id="bid_amount" name="bid_amount" min="{{ auction.current_highest_bid + 1 }}" required>
+                </div>
+                <button type="submit" class="btn">Place Bid</button>
+            </form>
+        </section>
+
+        <!-- Error/Success message -->
+        {% if message %}
+            <div class="message">
+                <p>{{ message }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Auction House. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

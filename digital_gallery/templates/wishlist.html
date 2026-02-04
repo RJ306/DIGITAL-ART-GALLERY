@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}My Wishlist - ArtSphere{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br><br><br><br><br><br>
+    <h2 class="section-title">My Wishlist</h2>
+    <br><br>
+    <div class="art-container">
+        {% if artworks %}
+            {% for art in artworks %}
+            <div class="art-card">
+                <a href="{{ url_for('artwork_detail', artwork_id=art.artwork_id) }}">
+                    {% if art.image_url.endswith('.mp4') %}
+                    <video class="art-video" autoplay loop muted>
+                        <source src="{{ art.image_url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    {% else %}
+                    <img src="{{ art.image_url }}" alt="{{ art.title }}" class="art-image">
+                    {% endif %}
+                    <h3>{{ art.title }}</h3>
+                </a>
+                <p>{{ art.description }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Your wishlist is empty.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="/static/css/artwork.css">
+{% endblock %}
