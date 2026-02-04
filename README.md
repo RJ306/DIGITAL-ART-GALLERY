@@ -51,33 +51,5 @@ Relational Model
 
 (Available inside Database-Design/ folder)
 
-
-▶ Demo Video
-
-
-
-[https://your-video-link-here](https://drive.google.com/file/d/1eHRxZrxWaRsrQFDvsdGNQRc-6Sksmi5f/view?usp=drive_link)
-
-⚙ How to Run
-
-Install Python
-
-Import database.sql into MySQL
-
-Configure database credentials in project files
-
-Run the Python server file
-
-Open browser and navigate to localhost
-
-🎯 Purpose
-
-This project was developed as a database course project to demonstrate practical implementation of:
-
-Database design
-
-Normalization
-
-SQL integration
-
-Web-based CRUD operations
+## ▶ Demo Video
+[Watch Demo Video](https://drive.google.com/file/d/1eHRxZrxWaRsrQFDvsdGNQRc-6Sksmi5f/view?usp=drive_link)
